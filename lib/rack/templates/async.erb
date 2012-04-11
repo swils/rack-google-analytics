@@ -1,21 +1,44 @@
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', <%= @options[:tracker].inspect %>]);
-<% if @options[:multiple] %>
-  _gaq.push(['_setDomainName', <%= @options[:domain].inspect %>]);
+<% if @options[:account] %>
+  _gaq.push(['_setAccount', '<%= @options[:account].to_s %>']);
 <% end %>
-<% if @options[:top_level] %>
-  _gaq.push(['_setDomainName', 'none']);
-  _gaq.push(['_setAllowLinker', true]);
+<% if @options[:domain_name] %>
+  _gaq.push(['_setDomainName', '<%= @options[:domain_name].to_s %>']);
 <% end %>
+<% if @options[:allow_linker] %>
+  _gaq.push(['_setAllowLinker', <%= @options[:allow_linker].to_s %>]);
+<% end %>
+<% if @options[:allow_hash] %>
+  _gaq.push(['_setAllowHash', <%= @options[:allow_hash].to_s %>]);
+<% end %>
+<% if @options[:camp_name_key] %>
+  _gaq.push(['_setCampNameKey', '<%= @options[:camp_name_key].to_s %>']);
+<% end %>
+<% if @options[:camp_source_key] %>
+  _gaq.push(['_setCampSourceKey', '<%= @options[:camp_source_key].to_s %>']);
+<% end %>
+<% if @options[:camp_medium_key] %>
+  _gaq.push(['_setCampMediumKey', '<%= @options[:camp_medium_key].to_s %>']);
+<% end %>
+<% if @options[:camp_term_key] %>
+  _gaq.push(['_setCampTermKey', '<%= @options[:camp_term_key].to_s %>']);
+<% end %>
+<% if @options[:camp_content_key] %>
+  _gaq.push(['_setCampContentKey', '<%= @options[:camp_content_key].to_s %>']);
+<% end %>
+<% if @options[:track_page_view] == true %>
   _gaq.push(['_trackPageview']);
+<% end %>
+<% if @options[:track_page_load_time] == true %>
   _gaq.push(['_trackPageLoadTime']);
+<% end %>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
 
 </script>
