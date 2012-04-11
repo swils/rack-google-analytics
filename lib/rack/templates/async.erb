@@ -1,31 +1,31 @@
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-<% if @options[:account] %>
+<% if @options.has_key? :account %>
   _gaq.push(['_setAccount', '<%= @options[:account].to_s %>']);
 <% end %>
-<% if @options[:domain_name] %>
+<% if @options.has_key? :domain_name %>
   _gaq.push(['_setDomainName', '<%= @options[:domain_name].to_s %>']);
 <% end %>
-<% if @options[:allow_linker] %>
+<% if @options.has_key? :allow_linker %>
   _gaq.push(['_setAllowLinker', <%= @options[:allow_linker].to_s %>]);
 <% end %>
-<% if @options[:allow_hash] %>
+<% if @options.has_key? :allow_hash %>
   _gaq.push(['_setAllowHash', <%= @options[:allow_hash].to_s %>]);
 <% end %>
-<% if @options[:camp_name_key] %>
+<% if @options.has_key? :camp_name_key %>
   _gaq.push(['_setCampNameKey', '<%= @options[:camp_name_key].to_s %>']);
 <% end %>
-<% if @options[:camp_source_key] %>
+<% if @options.has_key? :camp_source_key %>
   _gaq.push(['_setCampSourceKey', '<%= @options[:camp_source_key].to_s %>']);
 <% end %>
-<% if @options[:camp_medium_key] %>
+<% if @options.has_key? :camp_medium_key %>
   _gaq.push(['_setCampMediumKey', '<%= @options[:camp_medium_key].to_s %>']);
 <% end %>
-<% if @options[:camp_term_key] %>
+<% if @options.has_key? :camp_term_key %>
   _gaq.push(['_setCampTermKey', '<%= @options[:camp_term_key].to_s %>']);
 <% end %>
-<% if @options[:camp_content_key] %>
+<% if @options.has_key? :camp_content_key %>
   _gaq.push(['_setCampContentKey', '<%= @options[:camp_content_key].to_s %>']);
 <% end %>
 <% if @options[:track_page_view] == true %>

@@ -1,7 +1,8 @@
 require File.expand_path('../helper',__FILE__)
 
 class TestRackGoogleAnalytics < Test::Unit::TestCase
-  
+
+
   context "Asyncronous" do
     context "default" do
       setup { mock_app :async => true, :account => 'somebody' }
@@ -25,6 +26,35 @@ class TestRackGoogleAnalytics < Test::Unit::TestCase
       end
     end
 
+
+    context "option allow_linker" do
+      context "when set to true" do
+        setup { mock_app :async => true, :account => 'somebody', :allow_linker => true }
+        should "show up as true" do
+          get "/"
+          assert_match %r{'_setAllowLinker', true}, last_response.body
+        end
+      end
+
+      context "when set to false" do
+        setup { mock_app :async => true, :account => 'somebody', :allow_linker => false }
+        should "show up as false" do
+          get "/"
+          assert_match %r{'_setAllowLinker', false}, last_response.body
+        end
+      end
+
+      context "when not set" do
+        setup { mock_app :async => true, :account => 'somebody' }
+        should "not show up" do
+          get "/"
+          assert_no_match %r{'_setAllowLinker'}, last_response.body
+        end
+
+      end
+    end
+
+
     context "multiple sub domains" do
       setup { mock_app :async => true, :account => 'gonna', :domain_name => 'mydomain.com' }
       should "add multiple domain script" do
@@ -32,7 +62,8 @@ class TestRackGoogleAnalytics < Test::Unit::TestCase
         assert_match %r{'_setDomainName', 'mydomain.com'}, last_response.body
       end
     end
-    
+
+
     context "multiple top-level domains" do
       setup { mock_app :async => true, :account => 'get', :domain_name => 'none', :allow_linker => true }
       should "add top_level domain script" do
